@@ -6,7 +6,7 @@ import type { App } from "vue";
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: routers,
+  routes: [...routers],
   strict: true,
   // 管理组件滚动行为
   scrollBehavior: scrollBehaviorFn

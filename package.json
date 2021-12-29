@@ -8,17 +8,21 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "element-plus": "^1.2.0-beta.6",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "ts-node": "^9.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "sass": "^1.45.1",
     "typescript": "^4.4.4",
+    "unplugin-auto-import": "^0.5.5",
+    "unplugin-vue-components": "^0.17.11",
     "vite": "^2.7.2",
-    "vue-tsc": "^0.29.8",
-    "cz-customizable": "^6.3.0",
-    "cz-conventional-changelog": "^3.3.0"
+    "vue-tsc": "^0.29.8"
   },
   "config": {
     "commitizen": {

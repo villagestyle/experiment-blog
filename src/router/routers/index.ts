@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
+import { routers as ManagementRouter } from './management';
 
 export const routers: RouteRecordRaw[] = [
   {
@@ -16,5 +17,6 @@ export const routers: RouteRecordRaw[] = [
     meta: {
       title: "Home"
     }
-  }
+  },
+  ...ManagementRouter
 ];
