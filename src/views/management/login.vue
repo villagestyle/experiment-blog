@@ -3,19 +3,19 @@
     <div class="content">
       <img
         class="action"
-        v-if="action === 0"
+        v-show="action === 0"
         src="~assets/image/login/login-0.png"
         alt=""
       />
       <img
         class="action"
-        v-if="action === 1"
+        v-show="action === 1"
         src="~assets/image/login/login-1.png"
         alt=""
       />
       <img
         class="action"
-        v-if="action === 2"
+        v-show="action === 2"
         src="~assets/image/login/login-2.png"
         alt=""
       />
@@ -23,25 +23,41 @@
       <p>Welcome Home！</p>
 
       <el-form
-        ref="ruleForm"
+        ref="ruleFormRef"
         :model="ruleForm"
         :rules="rules"
-        label-width="120px"
+        label-width="0"
         class="demo-ruleForm"
       >
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="ruleForm.username"></el-input>
+        <el-form-item prop="username">
+          <el-input
+            v-model="ruleForm.username"
+            @focus="action = 1"
+            @blur="action = 0"
+            placeholder="Name"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="ruleForm.password" type="password"></el-input>
+        <el-form-item prop="password">
+          <el-input
+            v-model="ruleForm.password"
+            type="password"
+            @focus="action = 2"
+            @blur="action = 0"
+            placeholder="password"
+            show-password
+          ></el-input>
         </el-form-item>
       </el-form>
+
+      <el-button type="primary" @click="register">注册</el-button>
+      <el-button type="primary" @click="login">登录</el-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, reactive } from "vue";
+import userService from '../../api/user';
 
 type ActionType = 0 | 1 | 2;
 
@@ -59,10 +75,25 @@ const rules = {
 };
 
 const action = ref<ActionType>(0);
-const ruleForm = reactive({
+const ruleForm = reactive<UserLoginCredentials>({
   username: "",
   password: ""
 });
+
+// 注册
+const register = () => {
+  console.log(ruleForm);
+};
+
+// 登录
+const login = () => {
+  console.log(ruleForm);
+  userService.login(ruleForm).then(ret => {
+    console.log('登录成功', ret);
+  }).catch((err) => {
+    console.log('err', err);
+  })
+}
 </script>
 
 <style lang="scss" scoped>
