@@ -1,27 +1,23 @@
 import axios from "axios";
 import { ElMessage } from "element-plus";
+import { AxiosRequestConfigExtends, AxiosResponseExtends } from "../types/axios";
+import { VAxios } from '../utils/axios';
 
-const instance = axios.create({
+const instance = new VAxios({
     baseURL: "http://localhost:5050"
 });
 
-// 请求拦截
-instance.interceptors.request.use(config => {
-  // TODO: 携带token
-  config.headers = { ...config.headers, token: "" };
-  return config;
-});
-
-// 返回拦截
-instance.interceptors.response.use(res => {
-    if (res?.data?.code === 200) {
-        // 成功回调
-        return Promise.resolve(res.data);
-    } else {
-        // 失败拦截
-        ElMessage.error(res.data.msg);
-        return Promise.reject(res.data);
+instance.requestInterceptors = (config: AxiosRequestConfigExtends) => {
+    console.log(config.vConfig?.showLoading);
+    if (config.vConfig?.showLoading) {
+        console.log('获取到showLoading');
     }
-})
+    return config;
+}
+
+instance.responseInterceptors = (config: AxiosResponseExtends) => {
+    console.log('responseInterceptors', config);
+    return Promise.resolve(config);
+}
 
 export default instance;

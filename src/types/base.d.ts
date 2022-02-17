@@ -1,10 +1,9 @@
-
 interface VueRouteMeta {
-    keepAlive?: boolean;
-    top?: number;
+  keepAlive?: boolean;
+  top?: number;
 }
 
 interface UserLoginCredentials {
-    username: string;
-    password: string;
-  }
+  username: string;
+  password: string;
+}
