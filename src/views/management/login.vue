@@ -1,142 +1,131 @@
 <template>
   <div class="container">
-    <div class="content">
-      <img
-        class="action"
-        v-show="action === 0"
-        src="~assets/image/login/login-0.png"
-        alt=""
-      />
-      <img
-        class="action"
-        v-show="action === 1"
-        src="~assets/image/login/login-1.png"
-        alt=""
-      />
-      <img
-        class="action"
-        v-show="action === 2"
-        src="~assets/image/login/login-2.png"
-        alt=""
-      />
+    <el-form
+      class="form"
+      ref="formRef"
+      :model="form"
+      :rules="rules"
+      size="small"
+    >
+      <div class="header">管理系统</div>
 
-      <p>Welcome Home！</p>
+      <el-form-item prop="username">
+        <el-input
+          v-model="form.username"
+          :prefix-icon="User"
+          placeholder="username"
+          clearable
+        />
+      </el-form-item>
 
-      <el-form
-        ref="ruleFormRef"
-        :model="ruleForm"
-        :rules="rules"
-        label-width="0"
-        class="demo-ruleForm"
-      >
-        <el-form-item prop="username">
-          <el-input
-            v-model="ruleForm.username"
-            @focus="action = 1"
-            @blur="action = 0"
-            placeholder="Name"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input
-            v-model="ruleForm.password"
-            type="password"
-            @focus="action = 2"
-            @blur="action = 0"
-            placeholder="password"
-            show-password
-          ></el-input>
-        </el-form-item>
-      </el-form>
+      <el-form-item prop="password">
+        <el-input
+          v-model="form.password"
+          :prefix-icon="Lock"
+          placeholder="password"
+          type="password"
+          show-password
+          clearable
+        />
+      </el-form-item>
 
-      <el-button type="primary" @click="register">注册</el-button>
-      <el-button type="primary" @click="login">登录</el-button>
-    </div>
+      <el-form-item prop="code">
+        <el-input
+          v-model="form.code"
+          :prefix-icon="Bell"
+          placeholder="验证码"
+          clearable
+        />
+      </el-form-item>
+
+      <el-form-item class="form_remember">
+        <el-checkbox v-model="form.remember" label="记住密码" />
+      </el-form-item>
+
+      <el-form-item>
+        <el-button class="form_login" type="primary" @click="submit">
+          登录
+        </el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
-import userService from '../../api/user';
+import { ref, reactive, unref } from "vue";
+import { User, Lock, Bell } from "@element-plus/icons-vue";
+import type { ElForm } from "element-plus";
 
-type ActionType = 0 | 1 | 2;
+type FormInstance = InstanceType<typeof ElForm>;
 
-const rules = {
-  username: {
-    required: true,
-    message: "请输入用户名",
-    trigger: "blur"
-  },
-  password: {
-    required: true,
-    message: "请输入密码",
-    trigger: "blur"
-  }
-};
+const formRef = ref<FormInstance>();
 
-const action = ref<ActionType>(0);
-const ruleForm = reactive<UserLoginCredentials>({
+const form = reactive<UserLoginCredentials>({
   username: "",
-  password: ""
+  password: "",
+  code: "3367",
+  remember: "",
 });
 
-// 注册
-const register = () => {
-  console.log(ruleForm);
-};
+const rules = reactive({
+  username: [{ required: true, message: "必填选项" }],
+  password: [{ required: true, message: "必填选项" }],
+  code: [{ required: true, message: "必填选项" }],
+});
 
-// 登录
-const login = () => {
-  console.log(ruleForm);
-  userService.login(ruleForm).then(ret => {
-    console.log('登录成功', ret);
-  }).catch((err) => {
-    console.log('err', err);
-  })
-}
+const submit = async () => {
+  const ref = unref(formRef);
+  if (!ref) return;
+
+  ref.validate((valid) => {
+    if (valid) {
+      console.log("成功", form);
+    }
+  });
+};
 </script>
 
 <style lang="scss" scoped>
 .container {
   width: 100%;
   height: 100%;
-  background-image: url("assets/image/login/bg.png");
+  background-image: url("src/assets/image/background/login.jpg");
+  background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
-}
-
-.content {
-  width: 500px;
-  height: 400px;
-  border-radius: 12px;
-  background-color: #fff;
-  position: absolute;
-  left: calc(50% - 250px);
-  top: calc(50% - 200px);
-  box-shadow: 2px 2px 12px 0px #fff;
-  padding: 20px 20px;
-
-  .action {
+  .form {
     position: absolute;
-    top: -200px;
-    left: calc(50% - 124px);
-
-    &:nth-of-type(1) {
-      top: -160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 310px;
+    background-color: #fff;
+    padding: 24px 24px 6px;
+    border-radius: 10px;
+    .header {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 24px;
     }
-    &:nth-of-type(2) {
-      top: -178px;
+    &_remember {
+      height: 32px;
     }
-    &:nth-of-type(3) {
-      top: -136px;
+    &_login {
+      width: 100%;
     }
-  }
-
-  > p {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 25px;
-    color: #409eff;
+    & :deep(.el-form-item) {
+      .el-input__inner {
+        border-radius: 2px;
+        border-color: #d9d9d9;
+        &:focus {
+          border-color: #409eff;
+        }
+      }
+      .el-input__prefix {
+        color: #606266;
+        font-size: 14px;
+      }
+    }
   }
 }
 </style>

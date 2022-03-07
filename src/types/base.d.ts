@@ -6,4 +6,6 @@ interface VueRouteMeta {
 interface UserLoginCredentials {
   username: string;
   password: string;
+  code: string;
+  remember: string;
 }
