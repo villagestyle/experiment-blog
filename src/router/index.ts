@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import { routers } from "./routers";
+import { routers } from "./modules";
 import { scrollBehaviorFn } from "./scrollBehavior";
 
 const router = createRouter({
