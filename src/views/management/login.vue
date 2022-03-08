@@ -53,16 +53,22 @@
 
 <script lang="ts" setup>
 import { ref, reactive, unref } from "vue";
+import { useStore } from "vuex";
 import { User, Lock, Bell } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
+import router from "src/router";
+import Notice from "src/utils/notification";
+
+// 初始化 store
+const store = useStore();
 
 type FormInstance = InstanceType<typeof ElForm>;
 
 const formRef = ref<FormInstance>();
 
 const form = reactive<UserLoginCredentials>({
-  username: "",
-  password: "",
+  username: "admin",
+  password: "12345567",
   code: "3367",
   remember: "",
 });
@@ -77,9 +83,18 @@ const submit = async () => {
   const ref = unref(formRef);
   if (!ref) return;
 
-  ref.validate((valid) => {
+  ref.validate(async (valid) => {
     if (valid) {
-      console.log("成功", form);
+      store
+        .dispatch("user/login", form)
+        .then((res) => {
+          Notice.success({ message: "登录成功" });
+
+          router.push({ name: "Home" });
+        })
+        .catch(() => {
+          Notice.error({ message: "账号密码错误" });
+        });
     }
   });
 };
