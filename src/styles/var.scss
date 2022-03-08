@@ -1,0 +1,29 @@
+//提示文字颜色大小
+$c-main: #303133;
+$c-normal: #606266;
+$c-tips-font: #909399;
+
+$c-tips-key: #dd524d;
+
+$bt-primary: #1890ff;
+
+$bg-a:#DCDFE6;
+$bg-b:#E4E7ED;
+$bg-c:#EBEEF5;
+
+$f-size-sm:12px;
+$f-size-sm_:13px;
+$f-size-md:14px;
+$f-size-lg:16px;
+$f-size-xl:18px;
+
+$shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+$shadow5: 0 2px 12px 0 rgba(0,0,0,.5);
+
+//布局
+@mixin flex-center {
+  display: flex;justify-content: center;align-items: center;
+}
+@mixin line-1 {
+  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
