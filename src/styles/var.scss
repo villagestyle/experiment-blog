@@ -1,7 +1,7 @@
 //提示文字颜色大小
 $c-main: #303133;
 $c-normal: #606266;
-$c-tips-font: #909399;
+$c-tips: #909399;
 
 $c-tips-key: #dd524d;
 
@@ -26,4 +26,7 @@ $shadow5: 0 2px 12px 0 rgba(0,0,0,.5);
 }
 @mixin line-1 {
   overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
+@mixin line-2 {
+  overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2; 
 }
