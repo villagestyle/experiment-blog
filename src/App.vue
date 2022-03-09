@@ -10,4 +10,5 @@
 
 <style>
 @import "src/styles/global.scss";
-</style>
+@import "src/styles/font/iconfont.css";
+</style> 
