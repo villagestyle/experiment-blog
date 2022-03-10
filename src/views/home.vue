@@ -14,7 +14,11 @@
           <p>{{ item.date }}</p>
           <h3>{{ item.title }}</h3>
           <p>{{ item.content }}</p>
-          <p>2月 24, 2022</p>
+          <div>
+            <div class="icon--case"><span>1500</span></div>
+            <div class="icon--eye"><span>40</span></div>
+            <div class="icon--love"><span>40</span></div>
+          </div>
         </div>
       </div>
     </main>
@@ -93,7 +97,7 @@ const isEvenNumber = (num: number) => {
         width: 500px;
         height: 400px;
         border: 1px solid $bg-c;
-        padding: 80px;
+        padding: 80px 90px;
         background: #fff;
         margin-left: -30px;
         p:nth-child(1) {
@@ -104,6 +108,7 @@ const isEvenNumber = (num: number) => {
           margin-top: 10px;
           color: $c-main;
           font-weight: 600;
+          font-size: 28px;
         }
         p:nth-child(3) {
           margin-top: 10px;
@@ -113,11 +118,20 @@ const isEvenNumber = (num: number) => {
           @include line-2;
           -webkit-line-clamp: 5;
         }
-        p:nth-child(4) {
+        div:nth-child(4) {
+          display: flex;
           color: $c-tips;
-          font-size: 13px;
           position: absolute;
           bottom: 80px;
+          > div {
+            > span {
+              font-size: 13px;
+              margin-left: 5px;
+            }
+          }
+          > div + div {
+            margin-left: 20px;
+          }
         }
       }
       .describe--even {
