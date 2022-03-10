@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 
-export const routers: RouteRecordRaw[] = [
+export const Management: RouteRecordRaw[] = [
     {
         path: "/m",
         redirect: "/m/login"
@@ -11,4 +11,3 @@ export const routers: RouteRecordRaw[] = [
         component: () => import("src/views/management/login.vue")
     }
 ];
-  

@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
-import { routers as ManagementRouter } from './management';
+import { Article } from './article';
+import { Management } from './management';
 
 export const routers: RouteRecordRaw[] = [
   {
@@ -35,7 +36,8 @@ export const routers: RouteRecordRaw[] = [
     }
   },
 
-  ...ManagementRouter,
+  ...Article,
+  ...Management,
 
   {
     path: '/:catchAll(.*)',
