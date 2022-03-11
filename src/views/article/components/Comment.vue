@@ -44,17 +44,17 @@
       height: 22px;
       > span:nth-child(1) {
         font-size: 15px;
-        color: $c-normal;
+        color: $color-text-regular;
       }
       > span:nth-child(2) {
         font-size: 14px;
-        color: $c-tips;
+        color: $color-text-secondary;
       }
     }
     .content {
       font-weight: 400;
       font-size: 14px;
-      color: $c-normal;
+      color: $color-text-regular;
       margin-top: 8px;
       line-height: 1.6;
       @include line-2;
@@ -63,7 +63,7 @@
     .action-box {
       display: flex;
       margin-top: 8px;
-      color: $c-tips;
+      color: $color-text-secondary;
       > div {
         font-size: 14px;
         > span {

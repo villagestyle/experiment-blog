@@ -1,15 +1,14 @@
-//提示文字颜色大小
-$c-main: #303133;
-$c-normal: #606266;
-$c-tips: #909399;
+// 提示文字颜色大小
+$color-text-primary: #303133;
+$color-text-regular: #606266;
+$color-text-secondary: #909399;
 
-$c-tips-key: #dd524d;
+$color-primary: #1890ff;
+$color-error: #dd524d;
 
-$bt-primary: #1890ff;
-
-$bg-a:#DCDFE6;
-$bg-b:#E4E7ED;
-$bg-c:#EBEEF5;
+$background-color-primary: #DCDFE6;
+$background-color-regular: #E4E7ED;
+$background-color-secondary: #EBEEF5;
 
 $f-size-sm:12px;
 $f-size-sm_:13px;
@@ -18,7 +17,7 @@ $f-size-lg:16px;
 $f-size-xl:18px;
 
 $shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-$shadow5: 0 2px 12px 0 rgba(0,0,0,.5);
+$shadow-light5: 0 2px 12px 0 rgba(0,0,0,.5);
 
 //布局
 @mixin flex-center {

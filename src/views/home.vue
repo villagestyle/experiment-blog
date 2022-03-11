@@ -81,7 +81,7 @@ const isEvenNumber = (num: number) => {
     height: 200%;
     position: absolute;
     left: 50%;
-    background: $bg-c;
+    background: $background-color-secondary;
     top: -50%;
     z-index: 0;
   }
@@ -96,23 +96,23 @@ const isEvenNumber = (num: number) => {
         position: relative;
         width: 500px;
         height: 400px;
-        border: 1px solid $bg-c;
+        border: 1px solid $background-color-secondary;
         padding: 80px 90px;
         background: #fff;
         margin-left: -30px;
         p:nth-child(1) {
           font-size: 12px;
-          color: $c-tips;
+          color: $color-text-secondary;
         }
         h3:nth-child(2) {
           margin-top: 10px;
-          color: $c-main;
+          color: $color-text-primary;
           font-weight: 600;
           font-size: 28px;
         }
         p:nth-child(3) {
           margin-top: 10px;
-          color: $c-normal;
+          color: $color-text-regular;
           font-size: 14px;
           line-height: 1.8;
           @include line-2;
@@ -120,7 +120,7 @@ const isEvenNumber = (num: number) => {
         }
         div:nth-child(4) {
           display: flex;
-          color: $c-tips;
+          color: $color-text-secondary;
           position: absolute;
           bottom: 80px;
           > div {
