@@ -148,13 +148,13 @@ const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
       margin: 0 auto;
       padding: 50px 0;
       .title {
-        color: $c-main;
+        color: $color-text-primary;
         font-weight: 600;
         font-size: 28px;
       }
       .describe {
         font-size: 13px;
-        color: $c-normal;
+        color: $color-text-regular;
         margin-top: 20px;
         > span {
           > span {
@@ -169,7 +169,7 @@ const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
           height: 1px;
           width: 100px;
           display: block;
-          background: $bg-c;
+          background: $background-color-secondary;
           margin: 0 auto;
           margin-top: 30px;
         }
@@ -261,7 +261,7 @@ const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
             }
             .content {
               font-size: 14px;
-              color: $c-normal;
+              color: $color-text-regular;
               line-height: 1.6;
               @include line-2;
               -webkit-line-clamp: 3;
