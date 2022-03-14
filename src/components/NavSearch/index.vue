@@ -21,7 +21,7 @@
       <template #reference>
         <el-input
           ref="inputRef"
-          class="input"
+          class="search-input"
           size="small"
           :suffix-icon="Search"
           placeholder="搜索文章/用户"
@@ -92,16 +92,8 @@ const inputBlur = () => {
       }
     }
   }
-  .input {
+  .search-input {
     width: 270px;
-  }
-  .dis-input,
-  .input {
-    & :deep(.el-input__suffix) {
-      display: flex;
-      align-items: center;
-      top: -1px;
-    }
   }
 }
 
