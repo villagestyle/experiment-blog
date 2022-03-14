@@ -11,7 +11,11 @@
     <div class="action-container">
       <NavSearch />
 
-      <div class="login-container">
+      <div v-if="userInfo?.username" class="user-container">
+        {{ userInfo?.username }}
+      </div>
+
+      <div v-else class="login-container">
         <el-button size="small" type="primary" @click="login">登录</el-button>
       </div>
     </div>
@@ -21,9 +25,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const visible = ref(false);
+
+// 用户信息
+const userInfo = reactive(store.getters.userInfo);
 
 const login = () => {
   visible.value = true;
@@ -76,11 +86,14 @@ const login = () => {
     width: 30%;
     display: flex;
     margin: 0 16px;
+    .user-container,
     .login-container {
       height: 100%;
       display: flex;
       align-items: center;
       margin-left: 16px;
+      font-size: 14px;
+      color: $color-text-regular;
     }
   }
 }

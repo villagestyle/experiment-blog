@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <Nav />
+
     <main class="main">
       <section class="article-container">
         <div class="article-main">
@@ -78,13 +80,13 @@
           <div class="input-box">
             <div class="portrait"></div>
 
-            <el-input
-              class="input"
+            <!-- <el-input
+              class="enter-comments"
               type="textarea"
               :rows="3"
               resize="none"
               placeholder="输入评论（Enter换行）"
-            />
+            /> -->
           </div>
 
           <div class="header">全部评论 1</div>
@@ -141,140 +143,142 @@ const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
 <style lang="scss" scoped>
 .container {
   background-color: #f4f5f5;
-  .article-container {
-    background-color: #fff;
-    .article-main {
-      width: 700px;
-      margin: 0 auto;
-      padding: 50px 0;
-      .title {
-        color: $color-text-primary;
-        font-weight: 600;
-        font-size: 28px;
-      }
-      .describe {
-        font-size: 13px;
-        color: $color-text-regular;
-        margin-top: 20px;
-        > span {
+  .main {
+    .article-container {
+      background-color: #fff;
+      .article-main {
+        width: 700px;
+        margin: 0 auto;
+        padding: 50px 0;
+        .title {
+          color: $color-text-primary;
+          font-weight: 600;
+          font-size: 28px;
+        }
+        .describe {
+          font-size: 13px;
+          color: $color-text-regular;
+          margin-top: 20px;
           > span {
-            margin-left: 6px;
-          }
-        }
-        > span + span {
-          margin-left: 30px;
-        }
-        &::after {
-          content: "";
-          height: 1px;
-          width: 100px;
-          display: block;
-          background: $background-color-secondary;
-          margin: 0 auto;
-          margin-top: 30px;
-        }
-      }
-      .content {
-        margin-top: 40px;
-        font-size: 14px;
-        line-height: 2;
-      }
-    }
-  }
-  .comment-container {
-    padding: 50px 0;
-    .conment-main {
-      width: 700px;
-      margin: 0 auto;
-      padding: 30px;
-      background-color: #fff;
-      .header {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 20px;
-      }
-      .portrait {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        background-color: #f4f5f5;
-      }
-      .input-box {
-        display: flex;
-        margin-bottom: 50px;
-        .input {
-          margin-left: 20px;
-          & :deep(.el-textarea__inner) {
-            border: none;
-            background-color: #f2f3f5;
-            &::-webkit-input-placeholder {
-              color: #8a919f;
+            > span {
+              margin-left: 6px;
             }
           }
-        }
-      }
-      .content-box {
-        .item {
-          .sub-item {
-            width: calc(100% - 40px);
-            margin-top: 20px;
-            margin-left: auto;
-            padding: 20px;
-            border-radius: 4px;
-            background: rgba(247, 248, 250, 0.7);
+          > span + span {
+            margin-left: 30px;
+          }
+          &::after {
+            content: "";
+            height: 1px;
+            width: 100px;
+            display: block;
+            background: $background-color-secondary;
+            margin: 0 auto;
+            margin-top: 30px;
           }
         }
-        .item + .item {
-          margin-top: 30px;
+        .content {
+          margin-top: 40px;
+          font-size: 14px;
+          line-height: 2;
         }
       }
     }
-  }
-  .recommend-container {
-    padding-bottom: 50px;
-    .recommend-main {
-      width: 700px;
-      margin: 0 auto;
-      padding: 30px;
-      background-color: #fff;
-      .header {
-        font-size: 18px;
-        font-weight: 600;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #e8e8e8;
-      }
-      .content-box {
-        .item {
+    .comment-container {
+      padding: 50px 0;
+      .conment-main {
+        width: 700px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #fff;
+        .header {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 20px;
+        }
+        .portrait {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          flex-shrink: 0;
+          background-color: #f4f5f5;
+        }
+        .input-box {
           display: flex;
-          padding: 25px 0;
-          border-bottom: 1px solid #e8e8e8;
-          > div:nth-child(1) {
-            width: calc(100% - 200px);
-            height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            .title {
-              font-size: 16px;
-              font-weight: 600;
-            }
-            .content {
-              font-size: 14px;
-              color: $color-text-regular;
-              line-height: 1.6;
-              @include line-2;
-              -webkit-line-clamp: 3;
+          margin-bottom: 50px;
+          .enter-comments {
+            margin-left: 20px;
+            & :deep(.el-textarea__inner) {
+              border: none;
+              background-color: #f2f3f5;
+              &::-webkit-input-placeholder {
+                color: #8a919f;
+              }
             }
           }
-          > div:nth-child(2) {
-            width: 200px;
-            height: 100px;
-            padding-left: 20px;
-            > img {
-              object-fit: cover;
-              width: 100%;
-              height: 100%;
+        }
+        .content-box {
+          .item {
+            .sub-item {
+              width: calc(100% - 40px);
+              margin-top: 20px;
+              margin-left: auto;
+              padding: 20px;
+              border-radius: 4px;
+              background: rgba(247, 248, 250, 0.7);
+            }
+          }
+          .item + .item {
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+    .recommend-container {
+      padding-bottom: 50px;
+      .recommend-main {
+        width: 700px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #fff;
+        .header {
+          font-size: 18px;
+          font-weight: 600;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #e8e8e8;
+        }
+        .content-box {
+          .item {
+            display: flex;
+            padding: 25px 0;
+            border-bottom: 1px solid #e8e8e8;
+            > div:nth-child(1) {
+              width: calc(100% - 200px);
+              height: 100px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              .title {
+                font-size: 16px;
+                font-weight: 600;
+              }
+              .content {
+                font-size: 14px;
+                color: $color-text-regular;
+                line-height: 1.6;
+                @include line-2;
+                -webkit-line-clamp: 3;
+              }
+            }
+            > div:nth-child(2) {
+              width: 200px;
+              height: 100px;
+              padding-left: 20px;
+              > img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+              }
             }
           }
         }
