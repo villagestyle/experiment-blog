@@ -7,10 +7,27 @@
 
       <div class="nav-item">个人中心</div>
     </nav>
+
+    <div class="action-container">
+      <NavSearch />
+
+      <div class="login-container">
+        <el-button size="small" type="primary" @click="login">登录</el-button>
+      </div>
+    </div>
   </header>
+
+  <Login v-model="visible" />
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
+
+const visible = ref(false);
+
+const login = () => {
+  visible.value = true;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -22,13 +39,15 @@
   background: #fefefe;
   .logo {
     display: inline-block;
-    width: 20%;
+    width: 25%;
     height: 100%;
+    margin: 0 16px;
   }
   .nav-container {
-    width: 80%;
+    width: 45%;
     display: flex;
     font-size: 16px;
+    margin: 0 16px;
     color: $color-text-regular;
     .nav-item {
       height: 100%;
@@ -51,6 +70,17 @@
     }
     .nav-item--selection {
       color: $color-primary;
+    }
+  }
+  .action-container {
+    width: 30%;
+    display: flex;
+    margin: 0 16px;
+    .login-container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
     }
   }
 }
