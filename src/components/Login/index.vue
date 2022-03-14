@@ -7,6 +7,7 @@
         :model="form"
         :rules="rules"
         size="small"
+        @click.stop="middleLayerClick"
       >
         <div class="header">管理系统</div>
 
@@ -70,7 +71,7 @@ const props = defineProps({
 
 const emits = defineEmits({
   "update:modelValue": (value) => {
-    return value;
+    return true;
   },
 });
 
@@ -107,8 +108,15 @@ watch(
   }
 );
 
-const cancel = () => {};
+// 关闭组件
+const cancel = () => {
+  emits("update:modelValue", false);
+};
 
+// 组件中间层阻止 底部子级组件渗透
+const middleLayerClick = () => {};
+
+// 提交
 const submit = async () => {
   const ref = unref(formRef);
   if (!ref) return;
