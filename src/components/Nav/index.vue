@@ -30,7 +30,6 @@
           popper-class="nav-popover-container"
           placement="bottom-start"
           trigger="click"
-          :width="180"
           :show-after="50"
           :hide-after="50"
           :teleported="false"
@@ -38,7 +37,7 @@
           <template #reference>
             <div class="nav-ul-popover">
               <span class="text-selection">社区</span>
-              <!-- <el-icon size="16"><caret-bottom /></el-icon> -->
+              <el-icon size="16"><caret-bottom /></el-icon>
             </div>
           </template>
 
@@ -53,41 +52,19 @@
           </ul>
         </el-popover>
 
+        <!-- 登录 或 未登录 时显示的内容 -->
         <div class="nav-action">
           <NavSearch />
 
-          <div v-if="userInfo?.username" class="user-container">
-            {{ userInfo?.username }}
-          </div>
-
-          <div v-else class="login-container">
-            <el-button size="small" type="primary" @click="login"
-              >登录</el-button
-            >
-          </div>
+          <NavLogin />
         </div>
       </nav>
     </div>
   </header>
-
-  <Login v-model="visible" />
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
-import { useStore } from "vuex";
 import { CaretBottom } from "@element-plus/icons-vue";
-
-const store = useStore();
-
-const visible = ref(false);
-
-// 用户信息
-const userInfo = reactive(store.getters.userInfo);
-
-const login = () => {
-  visible.value = true;
-};
 </script>
 
 <style lang="scss" scoped>
@@ -141,25 +118,15 @@ const login = () => {
       .nav-action {
         display: flex;
         margin: 0 16px;
-        .user-container,
-        .login-container {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          margin-left: 16px;
-          font-size: 14px;
-          color: $color-text-regular;
-        }
       }
     }
   }
 }
 
 .nav-ul-popover-menu {
-  font-size: 16px;
+  font-size: 14px;
   .ul-item {
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
     cursor: pointer;
     position: relative;
     @include flex-center;
@@ -167,7 +134,7 @@ const login = () => {
 }
 
 .text-selection {
-  color: $color-primary;
+  color: $color-focus;
 }
 
 .text-selection-hover {
@@ -181,7 +148,7 @@ const login = () => {
       bottom: 0;
       left: 0;
       height: 2px;
-      background-color: $color-primary;
+      background-color: $color-focus;
     }
   }
 }
@@ -213,6 +180,8 @@ const login = () => {
 
 <style lang="scss">
 .nav-popover-container {
-  padding: 0 32px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  padding: 10px 32px !important;
 }
 </style>
