@@ -80,13 +80,13 @@
           <div class="input-box">
             <div class="portrait"></div>
 
-            <!-- <el-input
+            <el-input
               class="enter-comments"
               type="textarea"
               :rows="3"
               resize="none"
               placeholder="输入评论（Enter换行）"
-            /> -->
+            />
           </div>
 
           <div class="header">全部评论 1</div>
