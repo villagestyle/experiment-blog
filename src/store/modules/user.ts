@@ -1,4 +1,4 @@
-import { setToken, setUserInfo } from "src/utils/auth";
+import { setToken, removeToken, setUserInfo, removeUserInfo } from "src/utils/auth";
 
 const state = {
   token: '',
@@ -33,6 +33,19 @@ const actions = {
       }
     })
   },
+
+  // 退出登录
+  logout({ commit }: any) {
+    return new Promise((resolve, reject) => {
+      removeToken()
+      removeUserInfo()
+
+      commit('SET_TOKEN', '')
+      commit('SET_USER_INFO', {})
+
+      resolve(true)
+    })
+  }
 };
 
 export default {
