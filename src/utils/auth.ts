@@ -5,8 +5,8 @@ const TokenKey = 'EXPEROMENT—BLOG-TOKEN'
 const UserInfoKey = 'EXPEROMENT—BLOG-USERINFO'
 
 export const getToken = () => {
-  const data = localStorage.getItem(TokenKey) || ''
-  const res = JSON.parse(data)
+  const data = localStorage.getItem(TokenKey)
+  const res = JSON.parse(data as string)
   return res || ''
 }
 export const setToken = (data: any) => {
@@ -17,8 +17,8 @@ export const removeToken = () => {
 }
 
 export const getUserInfo = () => {
-  const data = localStorage.getItem(UserInfoKey) || ''
-  const res = JSON.parse(data)
+  const data = localStorage.getItem(UserInfoKey)
+  const res = JSON.parse(data as string)
   return res || {}
 }
 export const setUserInfo = (data: any) => {
