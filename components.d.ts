@@ -18,8 +18,6 @@ declare module 'vue' {
     Nav: typeof import('./src/components/Nav/index.vue')['default']
     NavLogin: typeof import('./src/components/NavLogin/index.vue')['default']
     NavSearch: typeof import('./src/components/NavSearch/index.vue')['default']
-    Search: typeof import('./src/components/Search/index.vue')['default']
-    SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }
 }
 
