@@ -3,7 +3,6 @@
     <!-- <el-input
       v-if="inputType === 1"
       class="dis-input"
-      size="small"
       :suffix-icon="Search"
       placeholder="搜索"
       @click="disClick"
@@ -22,7 +21,6 @@
         <el-input
           ref="inputRef"
           class="search-input"
-          size="small"
           :suffix-icon="Search"
           placeholder="搜索文章/用户"
           @focus="inputFocus"
