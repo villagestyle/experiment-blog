@@ -1,9 +1,9 @@
 <template>
   <!-- 评论组件 -->
-  <div class="conment-container">
+  <div class="comment-area-container">
     <div class="portrait"></div>
 
-    <div class="conment">
+    <div class="comment">
       <div class="user-box">
         <span>名字</span>
         <span>5小时前</span>
@@ -25,7 +25,7 @@
 </script>
 
 <style lang="scss" scoped>
-.conment-container {
+.comment-area-container {
   display: flex;
   .portrait {
     height: 40px;
@@ -34,7 +34,7 @@
     flex-shrink: 0;
     background-color: #f4f5f5;
   }
-  .conment {
+  .comment {
     width: 100%;
     margin-left: 20px;
     .user-box {
