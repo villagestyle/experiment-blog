@@ -1,12 +1,6 @@
 <template>
   <div class="container">
-    <el-form
-      class="form"
-      ref="formRef"
-      :model="form"
-      :rules="rules"
-      size="small"
-    >
+    <el-form class="form" ref="formRef" :model="form" :rules="rules">
       <div class="header">管理系统</div>
 
       <el-form-item prop="username">
