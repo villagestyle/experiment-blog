@@ -2,18 +2,23 @@
   <div class="container">
     <main class="main">
       <div class="item" v-for="(item, index) in data" :key="item.id">
-        <a>
-          <img
-            height="440"
-            width="680"
-            src="https://w.laborers.cn/wp-content/themes/Diaspora/timthumb/timthumb.php?src=https://w.laborers.cn/wp-content/uploads/2022/02/wallhaven-674018-1.jpeg"
-          />
-        </a>
+        <router-link to="/article" :name="item.title" :title="item.title">
+          <img height="440" width="680" :src="item.src" />
+        </router-link>
 
         <div :class="isEvenNumber(index)">
           <p>{{ item.date }}</p>
           <h3>{{ item.title }}</h3>
-          <p>{{ item.content }}</p>
+          <p>
+            <router-link
+              class="text-hover-opacity"
+              to="/article"
+              :name="item.title"
+              title="查看详情"
+            >
+              {{ item.content }}
+            </router-link>
+          </p>
           <div>
             <div class="icon--case"><span>1500</span></div>
             <div class="icon--eye"><span>40</span></div>
@@ -24,42 +29,40 @@
     </main>
 
     <footer class="footer">
-      <el-button class="loadmore">加载更多</el-button>
+      <el-button class="loadmore" :loading="loading" @click="loadmoreClick">
+        加载更多
+      </el-button>
     </footer>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 
+let loading = ref(false); // 按钮loading
+
+const obj = {
+  title: "题目题目",
+  date: "2月 24, 2022",
+  src: "https://w.laborers.cn/wp-content/themes/Diaspora/timthumb/timthumb.php?src=https://w.laborers.cn/wp-content/uploads/2022/02/wallhaven-674018-1.jpeg",
+  content: `Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry’s standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.`,
+};
 const data = reactive([
   {
     id: 1,
-    title: "题目题目",
-    date: "2月 24, 2022",
-    content: `Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry’s standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.`,
+    ...obj,
   },
   {
     id: 2,
-    title: "题目题目2",
-    date: "2月 25, 2022",
-    content: `Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry’s standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.`,
+    ...obj,
   },
 ]);
 
@@ -69,6 +72,22 @@ const isEvenNumber = (num: number) => {
 
   if ((num + 1) % 2 === 0) className += "describe--even";
   return className;
+};
+
+// 加载更多
+const loadmoreClick = () => {
+  try {
+    loading.value = true;
+
+    setTimeout(() => {
+      data.push({
+        id: data.length + 1,
+        ...obj,
+      });
+
+      loading.value = false;
+    }, 1000);
+  } catch (error) {}
 };
 </script>
 
@@ -91,6 +110,7 @@ const isEvenNumber = (num: number) => {
       margin-top: 100px;
       @include flex-center;
       a {
+        cursor: pointer;
         z-index: 2;
       }
       .describe {
@@ -107,17 +127,20 @@ const isEvenNumber = (num: number) => {
         }
         h3:nth-child(2) {
           margin-top: 10px;
-          color: $color-text-primary;
           font-weight: 600;
           font-size: 28px;
+          color: $color-text-primary;
+          cursor: pointer;
         }
         p:nth-child(3) {
           margin-top: 10px;
-          color: $color-text-regular;
           font-size: 14px;
           line-height: 1.8;
           @include line-2;
           -webkit-line-clamp: 5;
+          a {
+            color: $color-text-regular;
+          }
         }
         div:nth-child(4) {
           display: flex;
