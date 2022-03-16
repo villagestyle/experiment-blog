@@ -1,7 +1,8 @@
 <template>
   <!-- 评论输入框组件 -->
-  <div class="comment-enter-box-container">
+  <div class="comment-enter-box-container" @click.stop="middleLayerClick">
     <el-input
+      ref="inputRef"
       class="enter-comments"
       v-model="modelValue"
       type="textarea"
@@ -20,7 +21,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { ref, computed, unref } from "vue";
+import type { ElInput } from "element-plus";
+type InputInstance = InstanceType<typeof ElInput>;
 
 const props = defineProps({
   modelValue: {
@@ -43,19 +46,33 @@ const emits = defineEmits({
   },
 });
 
+const inputRef = ref<InputInstance>();
+
 // 是否为空评论
 const noEmptyComment = computed(() => (props.modelValue.trim() ?? "") !== "");
+
+// 组件中间层阻止 底部子级组件渗透
+const middleLayerClick = () => {};
 
 // 提交评论
 const submit = () => {
   emits("submit", props.modelValue);
 };
+
+// 控制输入框获取焦点
+const focus = () => {
+  const ref = unref(inputRef);
+  ref?.focus();
+};
+
+defineExpose({
+  focus,
+});
 </script>
 
 <style lang="scss" scoped>
 .comment-enter-box-container {
   width: 100%;
-  padding-left: 20px;
   > .enter-comments {
     & :deep(.el-textarea__inner) {
       border-color: transparent;
