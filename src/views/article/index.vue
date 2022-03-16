@@ -5,6 +5,8 @@
         <div class="article-main">
           <div class="title">题目题目</div>
 
+          <div class="author">苏东坡</div>
+
           <div class="describe">
             <span>2月 24, 2022</span>
             <span>阅读<span>35</span></span>
@@ -75,15 +77,13 @@
         <div class="conment-main">
           <div class="header">评论</div>
 
-          <div class="input-box">
+          <div class="form-box">
             <div class="portrait"></div>
 
-            <el-input
-              class="enter-comments"
-              type="textarea"
-              :rows="3"
-              resize="none"
-              placeholder="输入评论（Enter换行）"
+            <CommentEnterBox
+              v-model="comment"
+              :loading="loading"
+              @submit="submit"
             />
           </div>
 
@@ -91,10 +91,10 @@
 
           <div class="content-box">
             <div class="item" v-for="item in data" :key="item.id">
-              <Comment />
+              <CommentArea />
 
               <div class="sub-item" v-if="item.sub">
-                <Comment />
+                <CommentArea />
               </div>
             </div>
           </div>
@@ -132,10 +132,25 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-import Comment from "./components/Comment.vue";
+import { ref, reactive } from "vue";
+
+const loading = ref(false);
+const comment = ref(""); // input评论内容变量
 
 const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
+
+// 提交评论
+const submit = (value: string) => {
+  console.log(value);
+  return;
+  try {
+    loading.value = true;
+    console.log(1234, comment.value);
+    setTimeout(() => {
+      loading.value = false;
+    }, 1500);
+  } catch (error) {}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -153,10 +168,15 @@ const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
           font-weight: 600;
           font-size: 28px;
         }
+        .author {
+          font-size: 13px;
+          color: $color-text-regular;
+          margin-top: 16px;
+        }
         .describe {
           font-size: 13px;
           color: $color-text-regular;
-          margin-top: 20px;
+          margin-top: 4px;
           > span {
             > span {
               margin-left: 6px;
@@ -201,19 +221,9 @@ const data = reactive([{ id: 1, sub: true }, { id: 2 }]);
           flex-shrink: 0;
           background-color: #f4f5f5;
         }
-        .input-box {
+        .form-box {
           display: flex;
           margin-bottom: 50px;
-          .enter-comments {
-            margin-left: 20px;
-            & :deep(.el-textarea__inner) {
-              border: none;
-              background-color: #f2f3f5;
-              &::-webkit-input-placeholder {
-                color: #8a919f;
-              }
-            }
-          }
         }
         .content-box {
           .item {
