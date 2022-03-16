@@ -39,7 +39,7 @@
     </div>
 
     <div v-else class="login-container">
-      <el-button size="small" type="primary" @click="login">登录</el-button>
+      <el-button type="primary" @click="login">登录</el-button>
     </div>
   </div>
 
