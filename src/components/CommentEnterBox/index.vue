@@ -13,7 +13,7 @@
     />
 
     <div v-if="noEmptyComment" class="action-box">
-      <el-button type="primary" size="small" :loading="loading" @click="submit">
+      <el-button type="primary" :loading="loading" @click="submit">
         发表评论
       </el-button>
     </div>
@@ -75,14 +75,14 @@ defineExpose({
   width: 100%;
   > .enter-comments {
     & :deep(.el-textarea__inner) {
-      border-color: transparent;
+      box-shadow: none;
       background-color: #f2f3f5;
       &::-webkit-input-placeholder {
         color: #8a919f;
       }
     }
     & :deep(.el-textarea__inner:focus) {
-      border-color: $color-focus;
+      box-shadow: 0 0 0 1px $color-focus inset;
       background-color: #fff;
       &::-webkit-input-placeholder {
         color: #8a919f;
