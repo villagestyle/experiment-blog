@@ -14,8 +14,8 @@
         <template #reference>
           <img
             class="user-ul"
-            width="32"
-            height="32"
+            width="20"
+            height="20"
             src="src/assets/image/photo/man.png"
             alt=""
           />

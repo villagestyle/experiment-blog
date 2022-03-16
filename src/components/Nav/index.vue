@@ -2,12 +2,13 @@
   <header class="header-container">
     <div class="container">
       <a class="logo" href="">
-        <img
+        <!-- <img
           width="50"
           height="50"
           src="src/assets/image/logo/octocat.png"
           alt=""
         />
+        心情树洞 -->
         心情树洞
       </a>
 
@@ -78,7 +79,7 @@ import { CaretBottom } from "@element-plus/icons-vue";
     width: 100%;
     max-width: 1200px;
     display: flex;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0 auto;
     padding: 0 16px;
     color: $color-text-regular;
