@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
+import Layout from 'src/layout/index.vue';
 import { Article } from './article';
 import { Management } from './management';
 
@@ -6,18 +7,21 @@ export const routers: RouteRecordRaw[] = [
   {
     path: "/",
     name: "Root",
+    component: Layout,
     redirect: "/home",
     meta: {
       title: "Root"
-    }
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: () => import("src/views/home.vue"),
-    meta: {
-      title: "Home"
-    }
+    },
+    children: [
+      {
+        path: "/home",
+        name: "Home",
+        component: () => import("src/views/home.vue"),
+        meta: {
+          title: "Home"
+        }
+      },
+    ]
   },
   {
     path: '/404',
