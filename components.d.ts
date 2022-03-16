@@ -4,6 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CommentArea: typeof import('./src/components/CommentArea/index.vue')['default']
+    CommentEnterBox: typeof import('./src/components/CommentEnterBox/index.vue')['default']
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
