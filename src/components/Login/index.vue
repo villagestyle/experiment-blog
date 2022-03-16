@@ -6,7 +6,6 @@
         ref="formRef"
         :model="form"
         :rules="rules"
-        size="small"
         @click.stop="middleLayerClick"
       >
         <div class="header">管理系统</div>
