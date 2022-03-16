@@ -217,6 +217,7 @@ const submit = (value: string) => {
         .portrait {
           height: 40px;
           width: 40px;
+          margin-right: 20px;
           border-radius: 50%;
           flex-shrink: 0;
           background-color: #f4f5f5;
