@@ -15,13 +15,67 @@
 
       <div class="action-box">
         <div class="icon--like"><span>点赞</span></div>
-        <div class="icon--reply"><span>回复</span></div>
+
+        <div v-if="!isClcikReply" class="icon--reply" @click="replyClick(true)">
+          <span>回复</span>
+        </div>
+        <div
+          v-else
+          class="icon--reply selected-icon"
+          @click="replyClick(false)"
+        >
+          <span>取消回复</span>
+        </div>
+      </div>
+
+      <div v-if="isClcikReply" class="comment-enter">
+        <CommentEnterBox
+          ref="commentEnterBoxRef"
+          v-model="comment"
+          @submit="submit"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { nextTick, ref, unref } from "vue";
+import type { ElInput, Instance } from "element-plus";
+type InputInstance = InstanceType<typeof ElInput>;
+
+// 评论输入框 ref
+const commentEnterBoxRef = ref<InputInstance>();
+
+const isClcikReply = ref(false); // 是否点击回复
+
+const comment = ref(""); // input评论内容变量
+
+// 点击回复
+const replyClick = (action: boolean) => {
+  isClcikReply.value = action;
+
+  // 打开
+  if (action) {
+    nextTick(() => {
+      const ref = unref(commentEnterBoxRef);
+      ref?.focus();
+
+      // 阻止本次点击时 触发只执行一次的全局点击
+      event?.stopPropagation();
+      document.onclick = () => {
+        isClcikReply.value = false;
+
+        document.onclick = null; // 只执行一次
+      };
+    });
+  }
+};
+
+// 提交评论
+const submit = (value: string) => {
+  console.log(value);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -66,6 +120,10 @@
       color: $color-text-secondary;
       > div {
         font-size: 14px;
+        cursor: pointer;
+        &:hover {
+          color: $color-focus;
+        }
         > span {
           margin-left: 5px;
         }
@@ -79,6 +137,12 @@
       > div + div {
         margin-left: 20px;
       }
+      .selected-icon {
+        color: $color-focus;
+      }
+    }
+    .comment-enter {
+      margin-top: 16px;
     }
   }
 }
