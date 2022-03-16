@@ -1,6 +1,6 @@
 <template>
   <!-- 评论组件 -->
-  <div class="conment-box">
+  <div class="conment-container">
     <div class="portrait"></div>
 
     <div class="conment">
@@ -25,7 +25,7 @@
 </script>
 
 <style lang="scss" scoped>
-.conment-box {
+.conment-container {
   display: flex;
   .portrait {
     height: 40px;
