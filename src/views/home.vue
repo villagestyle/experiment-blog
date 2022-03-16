@@ -74,15 +74,16 @@ const isEvenNumber = (num: number) => {
 
 <style lang="scss" scoped>
 .container {
+  position: relative;
   &:before {
     content: "";
     display: block;
     width: 1px;
-    height: 200%;
+    height: calc(100% + 200px);
     position: absolute;
     left: 50%;
     background: $background-color-secondary;
-    top: -50%;
+    top: -100px;
     z-index: 0;
   }
   .main {
