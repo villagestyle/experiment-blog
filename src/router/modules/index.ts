@@ -21,6 +21,8 @@ export const routers: RouteRecordRaw[] = [
           title: "Home"
         }
       },
+
+      ...Article,
     ]
   },
   {
@@ -40,7 +42,6 @@ export const routers: RouteRecordRaw[] = [
     }
   },
 
-  ...Article,
   ...Management,
 
   {
