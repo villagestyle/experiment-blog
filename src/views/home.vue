@@ -1,19 +1,9 @@
 <template>
-    <div>
-        这是homePage
-    </div>
+    <IHeader name="1" :age="1"></IHeader>
 </template>
 
-<script>
-export default {
-    setup() {
-        
-    },
-}
+<script setup lang="ts">
 </script>
 
 <style lang="scss" scoped>
-div {
-    color: #000;
-}
 </style>
