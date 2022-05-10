@@ -31,7 +31,7 @@
       <div class="popover-container">
         <div class="header">
           <span class="tips">搜索历史</span>
-          <el-button type="text" class="clear">清空</el-button>
+          <el-button type="primary" text class="clear">清空</el-button>
         </div>
 
         <ul class="content">

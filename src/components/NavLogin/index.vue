@@ -49,13 +49,13 @@
 <script lang="ts" setup>
 import { ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
-import { ElMessageBox } from "element-plus";
 import {
   Avatar,
   BellFilled,
   SwitchButton,
   Tools,
 } from "@element-plus/icons-vue";
+import MsgBox from "src/utils/message-box";
 import Notice from "src/utils/notification";
 
 const store = useStore();
@@ -70,7 +70,7 @@ const login = () => {
 };
 
 const logout = () => {
-  ElMessageBox.confirm("是否退出？", "提示", {
+  MsgBox.confirm("是否退出？", "提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning",
