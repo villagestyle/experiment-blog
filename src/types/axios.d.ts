@@ -11,3 +11,5 @@ interface AxiosResponseExtends extends AxiosResponse {
 interface VConfig {
     showLoading: boolean;
 }
+
+type NullAble<T> = null | T;

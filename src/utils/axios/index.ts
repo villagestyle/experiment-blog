@@ -6,29 +6,31 @@ import axios, {
 } from "axios";
 import {
   AxiosRequestConfigExtends,
-  AxiosResponseExtends
+  AxiosResponseExtends,
+  NullAble,
+  VConfig
 } from "../../types/axios";
 
 export class VAxios extends Axios {
   private requestQueue: Map<string, AxiosRequestConfigExtends> = new Map();
-  public requestInterceptors:
-    | ((
+  public requestInterceptors: NullAble<(
         config: AxiosRequestConfigExtends
-      ) => AxiosRequestConfigExtends | Promise<AxiosRequestConfigExtends>)
-    | null = null;
+      ) => AxiosRequestConfigExtends | Promise<AxiosRequestConfigExtends>> = null
 
-  public responseInterceptors:
-    | ((responseConfig: AxiosResponseExtends) => Promise<AxiosResponseExtends>)
-    | null = null;
 
-  private instance: AxiosInstance | null = null;
+  public responseInterceptors: NullAble<(responseConfig: AxiosResponseExtends) => Promise<AxiosResponseExtends>> = null;
+
+  private instance: NullAble<AxiosInstance> = null;
+  private defaultVConfig: VConfig = { showLoading: false };
 
   constructor(config?: AxiosRequestConfig) {
     super();
     this.createInstance(config);
   }
 
-  createInstance(config?: AxiosRequestConfig) {
+  createInstance(config?: AxiosRequestConfigExtends) {
+    this.defaultVConfig = config?.vConfig || this.defaultVConfig;
+    delete config?.vConfig;
     this.instance = axios.create(config);
     this.init();
   }
@@ -52,13 +54,12 @@ export class VAxios extends Axios {
 
         if (extendsConfig) {
           this.requestQueue.delete(url);
-          return await this.responseInterceptors({
-            ...responseConfig,
-            vConfig: extendsConfig.vConfig
-          });
         }
 
-        return await this.responseInterceptors(responseConfig)
+        return await this.responseInterceptors({
+          ...responseConfig,
+          vConfig: extendsConfig?.vConfig
+        });
       }
       return responseConfig;
     });
@@ -68,9 +69,12 @@ export class VAxios extends Axios {
     config: AxiosRequestConfigExtends
   ): Promise<R> {
     if (this.verifyURL(config.url)) {
-      this.requestQueue.set(config.url, { ...config });
+      this.requestQueue.set(config.url, { ...config, vConfig: Object.assign(config.vConfig || {}, this.defaultVConfig) });
       delete config.vConfig;
-      const request = this.instance?.request<T, R>(config);
+      const request = this.instance?.request<T, R>({
+        ...config,
+        url: config.baseURL ? config.baseURL + config.url : config.url,
+      });
 
       return request ? request : Promise.reject();
     } else {

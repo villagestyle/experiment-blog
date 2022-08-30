@@ -20,4 +20,14 @@ instance.responseInterceptors = (config: AxiosResponseExtends) => {
     return Promise.resolve(config);
 }
 
+const data = await instance.vRequest<{ key: string }>({
+    method: 'get',
+    url: "/",
+    params: {
+        a: 1
+    }
+})
+
+data.config.data
+
 export default instance;
